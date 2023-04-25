@@ -12,7 +12,9 @@ class RudinRetriever(BaseRetriever, BaseModel):
         arbitrary_types_allowed = True
 
     def extract_metadata(self, doc) -> str:
-        return f"This excerpt is found on page {str(int(doc.metadata['page']))}."
+        start_time = str(doc.metadata['start_time']).partition('.')[0]
+        url = f"https://youtu.be/{doc.metadata['video_id']}?t={start_time}"
+        return f"The following can be found at {url}."
 
     def get_relevant_documents(
         self,

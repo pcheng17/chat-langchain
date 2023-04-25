@@ -23,12 +23,13 @@ async def aget_relevant_documents(self, query: str) -> List[Document]:
 VectorStoreRetriever.aget_relevant_documents = aget_relevant_documents
 
 
-prompt_template = """You are a helpful AI assistant. Use the following pieces of context to answer the question at the end. Each piece of context contains the page number on which the information can be found. Include all page numbers in your response as a suggestion for where they can reference the source. If you don't know the answer, just say that you don't know, don't try to make up an answer.
+prompt_template = """You are a helpful AI assistant. Use the following pieces of context to answer the question at the end. Each piece of context has a source URL. Include the source URLs in your answer. If you don't know the answer, just say that you don't know, don't try to make up an answer.
 
 {context}
 
 Question: {question}
 Helpful Answer:"""
+
 MY_QA_PROMPT = PromptTemplate(
     template=prompt_template, input_variables=["context", "question"]
 )
